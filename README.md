@@ -1,4 +1,4 @@
-# Project Title
+# FinBank Dashboard
 
 ## Table of Contents
 - [Introduction](#introduction)
