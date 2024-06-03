@@ -21,4 +21,4 @@ Briefly describe your project, what it does, and why it is useful or interesting
 - Feature 3: Brief description of the feature.
 
 ## What I Learned
-1.Enhanced my skills in managing and utilizing fonts within a Next.js project.
+  1.Enhanced my skills in managing and utilizing fonts within a Next.js project.
