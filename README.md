@@ -10,8 +10,9 @@
 Briefly describe your project, what it does, and why it is useful or interesting.
 
 ## Technologies Used
-  - React.js
+  - ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) React.js
   - Next.js
+  - Typescript
   - Tailwind CSS
   - shadCn/ui
 ## Key Features
