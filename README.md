@@ -22,3 +22,4 @@ Briefly describe your project, what it does, and why it is useful or interesting
 
 ## What I Learned
   1.Enhanced my skills in managing and utilizing fonts within a Next.js project.
+  2. Learned to use route groups for better organization and structure in my work.
