@@ -5,7 +5,7 @@ export default function NestedLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main>
+        <main className="flex">
             SidBar
             {children}
         </main>
