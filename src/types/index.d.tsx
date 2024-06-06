@@ -5,3 +5,9 @@ declare interface HeaderBoxProps{
     tittle:string
 
 }
+
+declare interface TotalBalanceBoxProps{
+    accounts: []
+    totalBanks: number
+    totalCurrentBalance: number
+}

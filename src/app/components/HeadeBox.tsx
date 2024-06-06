@@ -13,7 +13,7 @@ const HeaderBox = ({type="title" ,tittle, user, subtext}:HeaderBoxProps) => {
                 
             </h1>
 
-            <p className='text-gray-500'>{subtext}</p>
+            <p className='text-paragraphColor'>{subtext}</p>
 
         </div>
     )

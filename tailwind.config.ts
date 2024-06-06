@@ -10,8 +10,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      
       colors:{
         bankGradient: "#0179FE",
+        paragraphColor:"#475467"
       }
     },
   },
