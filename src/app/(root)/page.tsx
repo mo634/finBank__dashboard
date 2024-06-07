@@ -17,6 +17,7 @@ const Home = () => {
                     subtext="Access & manage your account and transactions efficiently."
                 />
             </header>
+            
             {/*end   Header  */}
 
             {/* start total balance box  */}

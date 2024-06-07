@@ -6,11 +6,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
   
+  }
+
+  body{
+    font-family: var("--font-ibm-plex-serif");
+  }
 
   @layer utilities {
     .main-container{
         @apply py-[1rem]
+    }
+    .link-text{
+        @apply flex items-center  text-[#344054] font-inter text-[13px] py-[16px] px-[12px] rounded-[6px] w-full block
     }
   }
