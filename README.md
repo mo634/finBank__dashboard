@@ -11,15 +11,13 @@ Briefly describe your project, what it does, and why it is useful or interesting
 
 ## Technologies Used
   - React
+  - Chart.js
+  - CountUp
   - Next.js
   - Typescript
   - Tailwind CSS
   - shadCn/ui
 ## Key Features
-- Feature 1: Brief description of the feature.
-- Feature 2: Brief description of the feature.
-- Feature 3: Brief description of the feature.
-
-## What I Learned
-  1.Enhanced my skills in managing and utilizing fonts within a Next.js project.
-  2. Learned to use route groups for better organization and structure in my work.
+- Feature 1: Implement parallel routing concept.
+- Feature 2: Create Doughnut chart using Chart.js.
+- Feature 3: Integrate CountUp for animated number displays.
