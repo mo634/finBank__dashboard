@@ -24,3 +24,4 @@ Briefly describe your project, what it does, and why it is useful or interesting
 - Feature 3: Integrate CountUp for animated number displays.
 - Feature 4: handle responsive for all devices.
 - Feature 5: handl active link functionallity
+- Feature 6: adding mobile navbar using Sheet component from shadcn for responsive design.
