@@ -5,7 +5,7 @@ import TotalBalanceBox from '../components/TotalBalanceBox'
 const Home = () => {
     const loggedUser = { firstName: "mohamed" }
     return (
-        <section className=" max-w-2xl w-full flex flex-col gap-y-[10px] main-container">
+        <section className="main-container max-w-2xl w-full flex flex-col gap-y-[10px] ">
 
             {/*stat   Header  */}
 

@@ -9,20 +9,22 @@ const SideBar = ({ user }: User) => {
     const pathname = usePathname()
 
     return (
-        <section className='main-container px-2 '>
-            {/*start heade */}
-            <Link className='flex items-center gap-x-2' href={"/"}>
+        <section className='main-container px-2 max-md:hidden'>
+            {/*start header */}
+            <Link className='mb-6 flex items-center gap-x-2' href={"/"}>
                 <Image
                     src="/icons/icon.svg"
                     width={34}
                     height={34}
                     alt="n"
-                />
+                    />
 
                 <h1 className='text-2xl font-bold hidden lg:inline-block'>Horizon</h1>
 
             </Link>
 
+                    {/*end header */}
+                    
             {/* start links */}
             <nav className='flex flex-col gap-y-5'>
                 {
@@ -37,15 +39,13 @@ const SideBar = ({ user }: User) => {
                                         "bg-bankGradient !text-[#ffff]": isActive
                                     })}
                                 >
-
-                                    <div className="relative size-6 mr-2 ">
+                                    <div className="lg:mr-3 relative w-[30px] h-[30px]">
                                         <Image
-                                        
                                             src={link.imgURL}
                                             alt={link.label}
                                             fill
                                             className={cn({
-                                                'brightness-[3] ': isActive
+                                                'brightness-[3]': isActive
                                             })}
                                         />
                                     </div>
@@ -61,7 +61,6 @@ const SideBar = ({ user }: User) => {
                 }
             </nav>
             {/* end links */}
-            {/*end heade */}
         </section>
     )
 }

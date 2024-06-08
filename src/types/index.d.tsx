@@ -28,3 +28,6 @@ declare type User = {
     dateOfBirth: string;
     ssn: string;
 };
+declare interface MobileNavProps {
+    user: User;
+}
