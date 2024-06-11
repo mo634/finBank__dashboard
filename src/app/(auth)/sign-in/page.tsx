@@ -1,3 +1,4 @@
+import AuthFrom from '@/app/components/AuthFrom'
 import Header from '@/app/components/Header'
 import React from 'react'
 
@@ -5,19 +6,21 @@ const SignIn = () => {
     return (
         <section className=' flex h-screen'>
             {/* start left side */}
-            <div className="bg-green-500  flex-1 flex justify-center items-center bg-red-500">
-                <div className=" bg-yellow-500 flex flex-col">
+            <div className="   flex-1 flex justify-center items-center">
+                <div className="  flex flex-col  p-2 ">
                     
                     {/*start log-in header  */}
                     <header className=' mb-3'>
                     <Header/>
+
+                    <p className=' font-bold text-[1.4rem]'>Log in</p>
+
+                    <p className=' text-[.9rem]  mt-1 text-paragraphColor'>Welcome back! Please enter your details.</p>
                     </header>
                     {/*end log-in header  */}
 
                     {/* start log-in from  */}
-                    <form action="">
-                        log form
-                    </form>
+                    <AuthFrom/>
                     {/* end  log-in from  */}
                 </div>
             </div>
