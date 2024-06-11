@@ -22,6 +22,9 @@ const config: Config = {
       colors: {
         bankGradient: "#0179FE",
         paragraphColor: "#475467",
+        backgroundImage: {
+          "gradient-mesh": "url('/icons/gradient-mesh.svg')"
+        },
         fill: {
           1: "rgba(255, 255, 255, 0.10)",
         },

@@ -12,7 +12,7 @@ export default function NestedLayout({
         , lastName: "Mostafa"
     }
     return (
-        <main className=" flex max-md:flex-col ">
+        <main className=" flex max-md:flex-col  ">
             <SideBar
                 user={loggedIn}
             />
@@ -32,7 +32,9 @@ export default function NestedLayout({
                     <MobileSideBar user={loggedIn} />
                 </div>
             </div>
+            <div className="flex-1 ">
             {children}
+            </div>
         </main>
     );
 }

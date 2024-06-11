@@ -78,11 +78,24 @@
   }
 }
 
+
+
 @layer utilities {
   .main-container {
     @apply py-[1rem] px-[1rem];
   }
   .link-text {
     @apply flex items-center text-[#344054] font-inter text-[13px] py-[13px] px-[12px] rounded-[6px] w-full block ;
+  }
+
+  .bank-card{
+    @apply  w-[305px] h-[190px] rounded-md
+  }
+
+  .backGroundSide{
+    @apply  h-[150px] bg-no-repeat bg-cover  rounded-md bg-gradient-mesh
+  }
+  .header-media{
+    @apply hidden lg:inline-block
   }
 }
