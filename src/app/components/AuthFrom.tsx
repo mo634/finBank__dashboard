@@ -15,20 +15,30 @@ import {
 import { Input } from "@/components/ui/input"
 import CustomInputField from "./CustomInputField"
 import { formSchema } from "@/lib/utils"
-const AuthFrom = () => {
+import { useState } from "react"
+import { Loader2 } from "lucide-react"
+import Link from "next/link"
+const AuthFrom = ({ type }: String) => {
+    // states 
+
+    const [isLoading, setIsloading] = useState(false)
+    const autFormSchema = formSchema(type);
+
+
+
+    // functions
 
     // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof autFormSchema>>({
+        resolver: zodResolver(autFormSchema),
         defaultValues: {
             email: "",
         },
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+    function onSubmit(values: z.infer<typeof autFormSchema>) {
+        setIsloading(true)
         console.log(values)
     }
 
@@ -36,21 +46,101 @@ const AuthFrom = () => {
         <div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    
+                    {/* if signup form -> need to add more fields */}
+                    {
+                        type === "sign-up" && (
+                            <>
+                                <div className=" flex gap-x-5">
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="firstName"
+                                        placeholder="Enter You First Name"
+                                    />
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="lastName"
+                                        placeholder="Enter You Last Name"
+                                    />
+                                </div>
+
+                                <CustomInputField
+                                    control={form.control}
+                                    name="address"
+                                    placeholder="Enter You Specific Address"
+                                />
+
+                                <div className="flex gap-x-5">
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="state"
+                                        placeholder="ex:NY"
+                                    />
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="postalCode"
+                                        placeholder="ex:11101"
+                                    />
+                                </div>
+
+                                <div className="flex gap-x-5">
+
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="dateOfBirth"
+                                        placeholder="yyyy-mm-dd"
+                                    />
+                                    <CustomInputField
+                                        control={form.control}
+                                        name="ssn"
+                                        placeholder="SSN"
+                                    />
+                                </div>
+                            </>
+                        )
+                    }
                     <CustomInputField
-                    control={form.control} 
-                    name="email"
-                    placeholder="Enter You Email"
+                        control={form.control}
+                        name="email"
+                        placeholder="Enter You Email"
                     />
 
                     <CustomInputField
-                    control={form.control} 
-                    name="password"
-                    placeholder="Enter You password"
+                        control={form.control}
+                        name="password"
+                        placeholder="Enter You password"
                     />
 
 
-                    <Button type="submit" className="w-full bg-bankGradient">Submit</Button>
+                    <Button
+
+                        disabled={isLoading}
+                        type="submit" className="w-full  bg-bankGradient">
+                        {
+                            isLoading ? <>
+                                <Loader2 size={20} className="animate-spin" />
+                                {
+                                    type === "sign-in" ? "log in" : "sign up"
+                                }
+                            </> : type === "sign-in" ? "log in" : "sign up"
+                        }
+                    </Button>
+
+
+                    {/*form  footer  */}
+
+                    <p>{
+                        type === "sign-in" ? "Don't  " : "Already"
+                    } have an account ?
+                        <Link
+                            className="text-bankGradient"
+                            href={
+                                type === "sign-in" ? "/sign-up" : "/sign-in"
+                            }>
+                            {
+                                type === "sign-in" ? "Sign up" : "Log in"
+                            }
+                        </Link>
+                    </p>
                 </form>
             </Form>
         </div>

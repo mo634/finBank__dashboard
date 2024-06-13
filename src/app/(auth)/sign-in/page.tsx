@@ -6,7 +6,7 @@ const SignIn = () => {
     return (
         <section className=' flex h-screen'>
             {/* start left side */}
-            <div className="   flex-1 flex justify-center items-center">
+            <div className=" flex-1 flex justify-center items-center">
                 <div className="  flex flex-col  p-2 ">
                     
                     {/*start log-in header  */}
@@ -20,7 +20,7 @@ const SignIn = () => {
                     {/*end log-in header  */}
 
                     {/* start log-in from  */}
-                    <AuthFrom/>
+                    <AuthFrom type="sign-in"/>
                     {/* end  log-in from  */}
                 </div>
             </div>
