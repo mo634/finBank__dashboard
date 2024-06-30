@@ -18,12 +18,13 @@ import { formSchema } from "@/lib/utils"
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
+import { signup } from "../../../lib/actions/user.action"
 const AuthFrom = ({ type }: String) => {
     // states 
 
     const [isLoading, setIsloading] = useState(false)
     const autFormSchema = formSchema(type);
-
+    const [user, setUser] = useState(null)
 
 
     // functions
@@ -37,112 +38,133 @@ const AuthFrom = ({ type }: String) => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof autFormSchema>) {
+    const onSubmit = async (values: z.infer<typeof autFormSchema>) => {
         setIsloading(true)
-        console.log(values)
+        try {
+
+            if (type = "sign-up") {
+                const newUser = await signup(values)
+                setUser(newUser)
+                console.log(newUser)
+            }
+
+
+        } catch (error) {
+            console.log(error)
+        }
+        finally {
+            setIsloading(false)
+        }
     }
 
     return (
         <div>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    {/* if signup form -> need to add more fields */}
-                    {
-                        type === "sign-up" && (
-                            <>
-                                <div className=" flex gap-x-5">
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="firstName"
-                                        placeholder="Enter You First Name"
-                                    />
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="lastName"
-                                        placeholder="Enter You Last Name"
-                                    />
-                                </div>
+            {
+                user
+                    ? <h1>SignUp Success</h1>
+                    : <>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                                {/* if signup form -> need to add more fields */}
+                                {
+                                    type === "sign-up" && (
+                                        <>
+                                            <div className=" flex gap-x-5">
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="firstName"
+                                                    placeholder="Enter You First Name"
+                                                />
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="lastName"
+                                                    placeholder="Enter You Last Name"
+                                                />
+                                            </div>
+
+                                            <CustomInputField
+                                                control={form.control}
+                                                name="address"
+                                                placeholder="Enter You Specific Address"
+                                            />
+
+                                            <div className="flex gap-x-5">
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="state"
+                                                    placeholder="ex:NY"
+                                                />
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="postalCode"
+                                                    placeholder="ex:11101"
+                                                />
+                                            </div>
+
+                                            <div className="flex gap-x-5">
+
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="dateOfBirth"
+                                                    placeholder="yyyy-mm-dd"
+                                                />
+                                                <CustomInputField
+                                                    control={form.control}
+                                                    name="ssn"
+                                                    placeholder="SSN"
+                                                />
+                                            </div>
+                                        </>
+                                    )
+                                }
+                                <CustomInputField
+                                    control={form.control}
+                                    name="email"
+                                    placeholder="Enter You Email"
+                                />
 
                                 <CustomInputField
                                     control={form.control}
-                                    name="address"
-                                    placeholder="Enter You Specific Address"
+                                    name="password"
+                                    placeholder="Enter You password"
                                 />
 
-                                <div className="flex gap-x-5">
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="state"
-                                        placeholder="ex:NY"
-                                    />
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="postalCode"
-                                        placeholder="ex:11101"
-                                    />
-                                </div>
 
-                                <div className="flex gap-x-5">
+                                <Button
 
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="dateOfBirth"
-                                        placeholder="yyyy-mm-dd"
-                                    />
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="ssn"
-                                        placeholder="SSN"
-                                    />
-                                </div>
-                            </>
-                        )
-                    }
-                    <CustomInputField
-                        control={form.control}
-                        name="email"
-                        placeholder="Enter You Email"
-                    />
-
-                    <CustomInputField
-                        control={form.control}
-                        name="password"
-                        placeholder="Enter You password"
-                    />
+                                    disabled={isLoading}
+                                    type="submit" className="w-full  bg-bankGradient">
+                                    {
+                                        isLoading ? <>
+                                            <Loader2 size={20} className="animate-spin" />
+                                            {
+                                                type === "sign-in" ? "log in" : "sign up"
+                                            }
+                                        </> : type === "sign-in" ? "log in" : "sign up"
+                                    }
+                                </Button>
 
 
-                    <Button
+                                {/*form  footer  */}
 
-                        disabled={isLoading}
-                        type="submit" className="w-full  bg-bankGradient">
-                        {
-                            isLoading ? <>
-                                <Loader2 size={20} className="animate-spin" />
-                                {
-                                    type === "sign-in" ? "log in" : "sign up"
-                                }
-                            </> : type === "sign-in" ? "log in" : "sign up"
-                        }
-                    </Button>
+                                <p>{
+                                    type === "sign-in" ? "Don't  " : "Already"
+                                } have an account ?
+                                    <Link
+                                        className="text-bankGradient"
+                                        href={
+                                            type === "sign-in" ? "/sign-up" : "/sign-in"
+                                        }>
+                                        {
+                                            type === "sign-in" ? "Sign up" : "Log in"
+                                        }
+                                    </Link>
+                                </p>
+                            </form>
+                        </Form>
+                    </>
 
-
-                    {/*form  footer  */}
-
-                    <p>{
-                        type === "sign-in" ? "Don't  " : "Already"
-                    } have an account ?
-                        <Link
-                            className="text-bankGradient"
-                            href={
-                                type === "sign-in" ? "/sign-up" : "/sign-in"
-                            }>
-                            {
-                                type === "sign-in" ? "Sign up" : "Log in"
-                            }
-                        </Link>
-                    </p>
-                </form>
-            </Form>
+            }
         </div>
     )
 }
