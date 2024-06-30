@@ -17,7 +17,8 @@ Briefly describe your project, what it does, and why it is useful or interesting
   - Typescript
   - Tailwind CSS
   - shadCn/ui
-  - twMerge and clsx for handle muliple calsses
+  - appwrite for backend integration
+  - 
 ## Key Features
 - Feature 1: Implement parallel routing concept.
 - Feature 2: Create Doughnut chart using Chart.js.
@@ -25,3 +26,5 @@ Briefly describe your project, what it does, and why it is useful or interesting
 - Feature 4: handle responsive for all devices.
 - Feature 5: handl active link functionallity
 - Feature 6: adding mobile navbar using Sheet component from shadcn for responsive design.
+- Appwrite Authentication: Secure user signup and session management integrated with Appwrite.
+- Secure Sessions: Implemented secure cookie handling for user sessions.
