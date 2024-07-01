@@ -18,13 +18,15 @@ import { formSchema } from "@/lib/utils"
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
-import { signup } from "../../../lib/actions/user.action"
+import { getLoggedInUser, signIn, signup } from "../../../lib/actions/user.action"
+import { useRouter } from "next/navigation"
 const AuthFrom = ({ type }: String) => {
     // states 
-
+    const router = useRouter()
     const [isLoading, setIsloading] = useState(false)
     const autFormSchema = formSchema(type);
     const [user, setUser] = useState(null)
+
 
 
     // functions
@@ -42,10 +44,22 @@ const AuthFrom = ({ type }: String) => {
         setIsloading(true)
         try {
 
-            if (type = "sign-up") {
+            if (type === "sign-up") {
                 const newUser = await signup(values)
                 setUser(newUser)
                 console.log(newUser)
+                setTimeout(() => {
+                    router.push("/");
+                }, 3000); // Wait for 3 seconds before redirecting
+            }
+            if (type === "sign-in") {
+                console.log("sign in ")
+                const response = await signIn({
+                    email: values.email,
+                    password: values.password
+                })
+                if (response) router.push("/")
+
             }
 
 
@@ -61,7 +75,7 @@ const AuthFrom = ({ type }: String) => {
         <div>
             {
                 user
-                    ? <h1>SignUp Success</h1>
+                    ? <h1 className=" text-green-600">SignUp Success</h1>
                     : <>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

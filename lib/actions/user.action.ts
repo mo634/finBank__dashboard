@@ -9,9 +9,12 @@ import { parseStringify } from "../utils.ts";
 
 export async function signup(userData: SignUpParams) {
   try {
+
     const { email, password } = userData;
 
     const { account } = await createAdminClient();
+
+    console.log("this is account",account)
 
     const newUser = await account.create(ID.unique(), email, password, `${userData.firstName} ${userData.lastName}`);
     const session = await account.createEmailPasswordSession(email, password);
@@ -29,11 +32,32 @@ export async function signup(userData: SignUpParams) {
   }
 }
 
+export async function signIn({ email, password }: SignInParams) {
+  try {
+    const { account } = await createAdminClient();
+
+    const response = await account.createEmailPasswordSession(email, password);
+
+    cookies().set("appwrite-session", response.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+    
+
+    return parseStringify(response);
+  } catch (error) {
+    console.error('Sign-in error:', error);
+    throw new Error('Invalid email or password');
+  }
+}
+
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
     return await account.get();
   } catch (error) {
-    return null;
+    console.log("Error" , error)
   }
 }

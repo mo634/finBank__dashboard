@@ -1,16 +1,16 @@
 import Image from "next/image";
 import MobileSideBar from "../components/MobileSideBar";
 import SideBar from "../components/SideBar";
-
-export default function NestedLayout({
+import { getLoggedInUser } from "../../../lib/actions/user.action";
+import { redirect } from "next/navigation";
+export default async function NestedLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const loggedIn = {
-        firstName: "Mohamed"
-        , lastName: "Mostafa"
-    }
+    const loggedIn = await getLoggedInUser();
+
+
     return (
         <main className=" flex max-md:flex-col  ">
             <SideBar

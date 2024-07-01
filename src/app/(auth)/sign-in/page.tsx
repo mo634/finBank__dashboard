@@ -22,6 +22,7 @@ const SignIn = () => {
                     {/* start log-in from  */}
                     <AuthFrom type="sign-in"/>
                     {/* end  log-in from  */}
+                    
                 </div>
             </div>
 

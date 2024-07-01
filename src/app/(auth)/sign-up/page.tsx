@@ -1,8 +1,11 @@
 import AuthFrom from '@/app/components/AuthFrom'
 import Header from '@/app/components/Header'
 import React from 'react'
+import { getLoggedInUser } from '../../../../lib/actions/user.action'
 
-const SignUp = () => {
+const SignUp =async () => {
+    const loggedUser = await getLoggedInUser()
+    console.log(loggedUser)
     return (
         <section className=' flex min-h-screen'>
             {/* start left side */}
