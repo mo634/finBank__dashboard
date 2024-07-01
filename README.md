@@ -28,3 +28,4 @@ Briefly describe your project, what it does, and why it is useful or interesting
 - Feature 6: adding mobile navbar using Sheet component from shadcn for responsive design.
 - Appwrite Authentication: Secure user signup and session management integrated with Appwrite.
 - Secure Sessions: Implemented secure cookie handling for user sessions.
+- hadle protected routing for authenticated users
