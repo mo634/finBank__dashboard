@@ -3,16 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { sidebarLinks } from '../../../constants'
-import { cn } from '../../../lib/utils'
+
 import { usePathname } from 'next/navigation'
 import Header from './Header'
+import { cn } from '../../../src/lib/utils'
 const SideBar = ({ user }: User) => {
     const pathname = usePathname()
 
     return (
         <section className='main-container px-2 max-md:hidden'>
             {/*start header */}
-            <Header applyMedia={true}/>
+            <Header applyMedia={true} />
             {/*end header */}
 
             {/* start links */}

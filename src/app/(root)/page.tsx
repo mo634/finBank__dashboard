@@ -2,23 +2,25 @@ import React from 'react'
 import HeaderBox from '../components/HeadeBox'
 import TotalBalanceBox from '../components/TotalBalanceBox'
 import RightSide from '../components/RightSide'
+import { getLoggedInUser } from '../../../lib/actions/user.action.ts'
 
 
 
-const Home = () => {
-    const loggedUser = { firstName: "mohamed" }
+const Home = async () => {
+    const loggedUser = await getLoggedInUser()
+    console.log(loggedUser?.name)
     return (
         <section className="main-container flex  gap-y-[10px]">
             {/* start Middle part  */}
 
             <div className="w-[70%] max-xl:w-full ">
 
-            {/*stat   Header  */}
+                {/*stat   Header  */}
                 <header>
                     <HeaderBox
                         type="greeting"
                         tittle="Welcome"
-                        user={loggedUser?.firstName || "Guest"}
+                        user={loggedUser?.name || "Guest"}
                         subtext="Access & manage your account and transactions efficiently."
                     />
                 </header>
@@ -40,9 +42,11 @@ const Home = () => {
             {/* start rightSide */}
 
             <div className="w-[30%] h-screen px-3 max-xl:hidden">
-            <RightSide 
-                banks={[{},{}]}
-            />
+                <RightSide
+                    banks={[{}, {}]}
+                    user={loggedUser?.name || "Guest"}
+                    email={loggedUser?.email || "Guest@gmail.com"}
+                />
             </div>
 
             {/* end rightSide */}

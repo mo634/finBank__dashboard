@@ -2,7 +2,7 @@ import React from 'react'
 import BankCard from './BankCard'
 import Image from 'next/image'
 
-const RightSide = ({ banks }: any) => {
+const RightSide = ({ banks,user,email}: any) => {
     return (
         <aside className='w-full h-screen px-2'>
             {/* start top part */}
@@ -20,8 +20,8 @@ const RightSide = ({ banks }: any) => {
                 </div>
 
                 <div className="mt-12">
-                    <p className=' font-bold text-xl'>Mohamed Mostafa</p>
-                    <p className=' text-gray-500'>Contact@gmail.com</p>
+                    <p className=' font-bold text-xl'>{user ? user : "Guest"}</p>
+                    <p className=' text-gray-500'>{email?email:"Guest@gmail.com"}</p>
                 </div>
 
             </div>

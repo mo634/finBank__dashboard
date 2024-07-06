@@ -1,22 +1,16 @@
-// src/lib/actions/user.action.ts
 "use server";
-import { cookies } from "next/headers";
-import { createAdminClient, createSessionClient } from "../appwrite.ts"
-import { ID } from "node-appwrite";
-import { parseStringify } from "../utils.ts"; 
-
-
+import { cookies, headers } from "next/headers";
+import { createAdminClient, createSessionClient } from "../appwrite.config.js"
+import { Account, Client, ID, OAuthProvider } from "node-appwrite";
+import { parseStringify } from "../../src/lib/utils";
+import { redirect } from "next/navigation.js";
 
 export async function signup(userData: SignUpParams) {
   try {
-
-    const { email, password } = userData;
-
+    const { email, password, firstName, lastName } = userData;
     const { account } = await createAdminClient();
 
-    console.log("this is account",account)
-
-    const newUser = await account.create(ID.unique(), email, password, `${userData.firstName} ${userData.lastName}`);
+    const newUser = await account.create(ID.unique(), email, password, `${firstName} ${lastName}`);
     const session = await account.createEmailPasswordSession(email, password);
 
     cookies().set("appwrite-session", session.secret, {
@@ -28,14 +22,13 @@ export async function signup(userData: SignUpParams) {
 
     return parseStringify(newUser);
   } catch (error) {
-    console.log("Error", error);
+    console.error("Sign-up error:", error);
   }
 }
 
 export async function signIn({ email, password }: SignInParams) {
   try {
     const { account } = await createAdminClient();
-
     const response = await account.createEmailPasswordSession(email, password);
 
     cookies().set("appwrite-session", response.secret, {
@@ -44,20 +37,33 @@ export async function signIn({ email, password }: SignInParams) {
       sameSite: "strict",
       secure: true,
     });
-    
 
     return parseStringify(response);
   } catch (error) {
-    console.error('Sign-in error:', error);
-    throw new Error('Invalid email or password');
+    console.error("Sign-in error:", error);
+    throw new Error("Invalid email or password");
   }
 }
+
+export async function signUpWithGithub() {
+	const { account } = await createAdminClient();
+
+  const origin = headers().get("origin");
+  
+	const redirectUrl = await account.createOAuth2Token(
+		OAuthProvider.Github,
+		`${origin}/oauth`,
+		`${origin}/signup`,
+	);
+
+	return redirect(redirectUrl);
+};
 
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
     return await account.get();
   } catch (error) {
-    console.log("Error" , error)
+    console.error("Get logged-in user error:", error);
   }
 }

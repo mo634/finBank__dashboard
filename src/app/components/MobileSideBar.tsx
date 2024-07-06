@@ -13,7 +13,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { sidebarLinks } from '../../../constants'
 import { usePathname } from 'next/navigation'
-import { cn } from '../../../lib/utils'
+import { cn } from '../../../src/lib/utils'
 
 const MobileSideBar = ({ user }: MobileNavProps) => {
     const pathname = usePathname()
@@ -45,7 +45,7 @@ const MobileSideBar = ({ user }: MobileNavProps) => {
                             </Link>
                         </SheetTitle>
                     </SheetHeader>
-                    
+
                     <SheetDescription>
                         {/* start links */}
                         <nav className='flex flex-col gap-y-5'>

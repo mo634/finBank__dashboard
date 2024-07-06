@@ -7,6 +7,25 @@
 			"problemMatcher": [],
 			"label": "npm: start",
 			"detail": "next start"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "next dev",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"statusbar": {
+					"label": "run app",
+					"color": "#3ff148",
+					
+				}
+			}
+			
 		}
 	]
 }
