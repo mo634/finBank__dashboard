@@ -18,36 +18,28 @@ import { formSchema } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { getLoggedInUser, signIn, signup, signUpWithGithub } from "../../../lib/actions/user.action";
+import { getLoggedInUser, signIn, signup, signUpWithGithub } from "../../../../lib/actions/user.action";
 import { useRouter } from "next/navigation";
+import SignUpInputFields from "./SignUpInputFields";
 
 const AuthFrom = ({ type }: { type: string }) => {
+    // ******************************  start states ***********************************
     const router = useRouter();
+    const autFormSchema = formSchema(type);
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [formError, setFormError] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userData = await getLoggedInUser();
-                setUser(userData);
-            } catch (error) {
-                console.error("Error fetching logged-in user:", error);
-            }
-        };
-
-        fetchUser();
-    }, []);
-
-    const autFormSchema = formSchema(type);
-
     const form = useForm<z.infer<typeof autFormSchema>>({
         resolver: zodResolver(autFormSchema),
         defaultValues: {
             email: "",
         },
     });
+
+    //******************************  end states ***********************************
+
+
+    //******************************  start functions  ***********************************
 
     const handleGitHubOAuth = async () => {
         try {
@@ -79,6 +71,24 @@ const AuthFrom = ({ type }: { type: string }) => {
         }
     };
 
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await getLoggedInUser();
+                setUser(userData);
+            } catch (error) {
+                console.error("Error fetching logged-in user:", error);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
+
+    //******************************  end functions  ***********************************
+
+
     return (
         <div>
             {user ? (
@@ -87,50 +97,9 @@ const AuthFrom = ({ type }: { type: string }) => {
                 <>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            {/*start  form input fields */}
                             {type === "sign-up" && (
-                                <>
-                                    <div className=" flex gap-x-5">
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="firstName"
-                                            placeholder="Enter Your First Name"
-                                        />
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="lastName"
-                                            placeholder="Enter Your Last Name"
-                                        />
-                                    </div>
-                                    <CustomInputField
-                                        control={form.control}
-                                        name="address"
-                                        placeholder="Enter Your Address"
-                                    />
-                                    <div className="flex gap-x-5">
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="state"
-                                            placeholder="ex: NY"
-                                        />
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="postalCode"
-                                            placeholder="ex: 11101"
-                                        />
-                                    </div>
-                                    <div className="flex gap-x-5">
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="dateOfBirth"
-                                            placeholder="yyyy-mm-dd"
-                                        />
-                                        <CustomInputField
-                                            control={form.control}
-                                            name="ssn"
-                                            placeholder="SSN"
-                                        />
-                                    </div>
-                                </>
+                                <SignUpInputFields formControl={form.control} />
                             )}
                             <CustomInputField
                                 control={form.control}
@@ -142,6 +111,10 @@ const AuthFrom = ({ type }: { type: string }) => {
                                 name="password"
                                 placeholder="Enter Your Password"
                             />
+                            {/* start  form input fields  */}
+
+                            {/* start form btns */}
+
                             <Button disabled={isLoading} type="submit" className="w-full bg-bankGradient">
                                 {isLoading ? (
                                     <>
@@ -152,6 +125,8 @@ const AuthFrom = ({ type }: { type: string }) => {
                                     type === "sign-in" ? "log in" : "sign up"
                                 )}
                             </Button>
+
+
                             <Button
                                 className="w-full bg-bankGradient"
                                 type="button"
@@ -159,13 +134,20 @@ const AuthFrom = ({ type }: { type: string }) => {
                             >
                                 Continue with Github
                             </Button>
+
+                            {/* end form btns */}
+
                             {formError && <p className="text-red-500">{formError}</p>}
+
+
                             <p>
                                 {type === "sign-in" ? "Don't" : "Already"} have an account?
                                 <Link className="text-bankGradient" href={type === "sign-in" ? "/sign-up" : "/sign-in"}>
                                     {type === "sign-in" ? "Sign up" : "Log in"}
                                 </Link>
                             </p>
+
+                            
                         </form>
                     </Form>
                 </>

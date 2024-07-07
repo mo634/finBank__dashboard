@@ -1,9 +1,9 @@
-import AuthFrom from '@/app/components/AuthFrom'
+import AuthFrom from '@/app/components/auth-form/AuthFrom'
 import Header from '@/app/components/Header'
 import React from 'react'
 import { getLoggedInUser } from '../../../../lib/actions/user.action'
 
-const SignUp =async () => {
+const SignUp = async () => {
     const loggedUser = await getLoggedInUser()
     console.log(loggedUser)
     return (
