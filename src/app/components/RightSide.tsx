@@ -3,6 +3,7 @@ import BankCard from './BankCard'
 import Image from 'next/image'
 
 const RightSide = ({ banks,user,email}: any) => {
+    console.log(user)
     return (
         <aside className='w-full h-screen px-2'>
             {/* start top part */}
@@ -13,7 +14,7 @@ const RightSide = ({ banks,user,email}: any) => {
                     <div className=" backGroundSide" />
 
                     <div className=" absolute bottom-[-40px] bg-[#ffff] left-2 rounded-full w-fit shadow-md py-4 px-3">
-                        <span className='text-[#0079ff] text-[2rem] bg-gray-300 rounded-full py-2 px-3 '>M</span>
+                        <span className='text-[#0079ff] text-[2rem] bg-gray-300 rounded-full py-2 px-3 capitalize'>{user[0]}</span>
                     </div>
 
 
@@ -52,13 +53,13 @@ const RightSide = ({ banks,user,email}: any) => {
                             <div className=' text-[#ffff] '>
                                 {/* first car  */}
                                 <div className=" absolute z-10 ">
-                                    <BankCard />
+                                    <BankCard user={user}/>
                                 </div>
 
                                 {/* second card */}
                                 <div className="absolute left-[20px] top-[23px] ">
                                     {
-                                        banks[1] && <BankCard />
+                                        banks[1] && <BankCard user={user}/>
                                     }
                                 </div>
 

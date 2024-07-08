@@ -1,9 +1,15 @@
 import Image from 'next/image'
 import React from 'react'
+import { signOut } from '../../../lib/actions/user.action'
 
 const SideBarFooter = ({ user }) => {
 
     console.log("user ")
+
+    const handleLogOut = async () => {
+        console.log("clicked")
+        signOut()
+    }
     return (
         <div className='flex items-center justify-between'>
 
@@ -16,7 +22,9 @@ const SideBarFooter = ({ user }) => {
                 <p className='text-gray-500 text-[.9rem]'>{user.email}</p>
             </div>
 
-            <div className="" >
+            <div className=" cursor-pointer" 
+            onClick={handleLogOut}
+            >
             <Image className='' src={"icons/logout.svg"} alt='logout' width={25} height={25} />
             </div>
 

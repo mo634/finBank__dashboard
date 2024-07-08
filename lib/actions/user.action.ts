@@ -46,19 +46,29 @@ export async function signIn({ email, password }: SignInParams) {
 }
 
 export async function signUpWithGithub() {
-	const { account } = await createAdminClient();
+  const { account } = await createAdminClient();
 
   const origin = headers().get("origin");
-  
-	const redirectUrl = await account.createOAuth2Token(
-		OAuthProvider.Github,
-		`${origin}/oauth`,
-		`${origin}/signup`,
-	);
 
-	return redirect(redirectUrl);
+  const redirectUrl = await account.createOAuth2Token(
+    OAuthProvider.Github,
+    `${origin}/oauth`,
+    `${origin}/signup`,
+  );
+
+  return redirect(redirectUrl);
 };
+export async function signOut() {
+  try {
+    const { account } = await createSessionClient();
 
+    cookies().delete('appwrite-session');
+
+    await account.deleteSession('current');
+  } catch (error) {
+    return null;
+  }
+}
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const BankCard = () => {
+const BankCard = ({user}) => {
     return (
 
         <div className=" text-sm  bg-blue-500 bank-card flex justify-between ">
@@ -9,13 +9,13 @@ const BankCard = () => {
             {/* left side Card  */}
             <div className=" p-3  flex flex-col justify-between  " >
                 <div className="">
-                    <h2>Adrain JSM</h2>
+                    <h2>{user}</h2>
                     <span>$123.50</span>
                 </div>
                 <div className="">
 
                     <div className=" mb-2 flex justify-between">
-                        <span>Adrain JSM</span>
+                        <span>{user}</span>
                         <span>**/**</span>
                     </div>
 

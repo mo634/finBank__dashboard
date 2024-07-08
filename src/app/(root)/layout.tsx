@@ -10,6 +10,10 @@ export default async function NestedLayout({
 }>) {
     const loggedIn = await getLoggedInUser();
 
+    if (!loggedIn) {
+        redirect("/sign-in");
+    }
+
 
     return (
         <main className=" flex max-md:flex-col  ">
