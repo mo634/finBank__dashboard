@@ -11,7 +11,7 @@ const SignIn = () => {
 
                     {/*start log-in header  */}
                     <header className=' mb-3'>
-                        <Header />
+                        <Header applyMedia={false}/>
 
                         <p className=' font-bold text-[1.4rem]'>Log in</p>
 
