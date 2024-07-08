@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import DoughnutChat from './DoughnutChat'
-import AnimatedCount from './animatedCount'
+import AnimatedCount from './AnimatedCount'
 
 
 const TotalBalanceBox = ({accounts, totalBanks, totalCurrentBalance}: TotalBalanceBoxProps) => {
