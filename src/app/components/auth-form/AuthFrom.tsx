@@ -22,11 +22,14 @@ import { getLoggedInUser, signIn, signup, signUpWithGithub } from "../../../../l
 import { useRouter } from "next/navigation";
 import SignUpInputFields from "./SignUpInputFields";
 
+import { FaGithub } from 'react-icons/fa';
+
 const AuthFrom = ({ type }: { type: string }) => {
     // ******************************  start states ***********************************
     const router = useRouter();
     const autFormSchema = formSchema(type);
     const [isLoading, setIsLoading] = useState(false);
+    const [isGithubLoading, setIsGithubLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [formError, setFormError] = useState(null);
     const form = useForm<z.infer<typeof autFormSchema>>({
@@ -42,10 +45,13 @@ const AuthFrom = ({ type }: { type: string }) => {
     //******************************  start functions  ***********************************
 
     const handleGitHubOAuth = async () => {
+        setIsGithubLoading(true);
         try {
             await signUpWithGithub();
         } catch (error) {
             setFormError("GitHub OAuth sign-up failed.");
+        }finally{
+            setIsGithubLoading(false);
         }
     };
 
@@ -127,13 +133,24 @@ const AuthFrom = ({ type }: { type: string }) => {
                             </Button>
 
 
-                            <Button
-                                className="w-full bg-bankGradient"
+                            <button
+                                className="w-full max-w-xs px-4 py-2 bg-gray-900 text-white rounded-md flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
                                 type="button"
                                 onClick={handleGitHubOAuth}
                             >
-                                Continue with Github
-                            </Button>
+
+                                {isGithubLoading ? (
+                                    <>
+                                        <Loader2 size={20} className="animate-spin" />
+                                        {"Loggin..."}
+                                    </>
+                                ) : (
+                                    <>
+                                        <FaGithub size={20} className="mr-2" />
+                                        Continue with GitHub
+                                    </>
+                                )}
+                            </button>
 
                             {/* end form btns */}
 
@@ -147,7 +164,7 @@ const AuthFrom = ({ type }: { type: string }) => {
                                 </Link>
                             </p>
 
-                            
+
                         </form>
                     </Form>
                 </>
