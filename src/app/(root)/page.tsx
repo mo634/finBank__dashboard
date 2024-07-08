@@ -10,7 +10,7 @@ const Home = async () => {
     const loggedUser = await getLoggedInUser()
     console.log(loggedUser?.name)
     return (
-        <section className="main-container flex  gap-y-[10px]">
+        <section className=" max-h-screen main-container flex  gap-y-[10px] ">
             {/* start Middle part  */}
 
             <div className="w-[70%] max-xl:w-full ">
