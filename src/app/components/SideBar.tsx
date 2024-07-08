@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 import Header from './Header'
 import { cn } from '../../../src/lib/utils'
 import SideBarFooter from './SideBarFooter'
-const SideBar = ({ user }: User) => {
+const SideBar = ({ user }: any) => {
     const pathname = usePathname()
 
     return (
