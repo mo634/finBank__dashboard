@@ -2,6 +2,7 @@ import AuthFrom from '@/app/components/auth-form/AuthFrom'
 import Header from '@/app/components/Header'
 import React from 'react'
 import { getLoggedInUser } from '../../../../lib/actions/user.action'
+import AuthFromRightSide from '@/app/components/auth-form/AuthFromRightSide'
 
 const SignUp = async () => {
     const loggedUser = await getLoggedInUser()
@@ -9,7 +10,7 @@ const SignUp = async () => {
     return (
         <section className=' flex min-h-screen'>
             {/* start left side */}
-            <div className="   flex-1 flex justify-center items-center">
+            <div className="py-3   flex-1 flex justify-center items-center">
                 <div className="  flex flex-col ">
 
                     {/*start log-in header  */}
@@ -31,7 +32,7 @@ const SignUp = async () => {
             {/* end left side  */}
 
             {/* start right side  */}
-            <div className="flex-1">right</div>
+            <AuthFromRightSide />
             {/* end  right side  */}
         </section>
     )

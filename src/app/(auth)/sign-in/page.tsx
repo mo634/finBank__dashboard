@@ -1,5 +1,7 @@
 import AuthFrom from '@/app/components/auth-form/AuthFrom'
+import AuthFromRightSide from '@/app/components/auth-form/AuthFromRightSide'
 import Header from '@/app/components/Header'
+
 import React from 'react'
 
 const SignIn = () => {
@@ -11,7 +13,7 @@ const SignIn = () => {
 
                     {/*start log-in header  */}
                     <header className=' mb-3'>
-                        <Header applyMedia={false}/>
+                        <Header applyMedia={false} />
 
                         <p className=' font-bold text-[1.4rem]'>Log in</p>
 
@@ -29,7 +31,7 @@ const SignIn = () => {
             {/* end left side  */}
 
             {/* start right side  */}
-            <div className="flex-1">right</div>
+            <AuthFromRightSide/>
             {/* end  right side  */}
         </section>
     )

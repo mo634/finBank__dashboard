@@ -134,7 +134,7 @@ const AuthFrom = ({ type }: { type: string }) => {
 
 
                             <button
-                                className="w-full max-w-xs px-4 py-2 bg-gray-900 text-white rounded-md flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
+                                className="w-full  px-4 py-2 bg-gray-900 text-white rounded-md flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
                                 type="button"
                                 onClick={handleGitHubOAuth}
                             >
