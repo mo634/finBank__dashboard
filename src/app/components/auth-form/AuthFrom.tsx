@@ -23,6 +23,8 @@ import { useRouter } from "next/navigation";
 import SignUpInputFields from "./SignUpInputFields";
 
 import { FaGithub } from 'react-icons/fa';
+import { PlaidLink } from "react-plaid-link";
+import PlaidLinkComponent from "../PlaidLinkComponent";
 
 const AuthFrom = ({ type }: { type: string }) => {
     // ******************************  start states ***********************************
@@ -50,7 +52,7 @@ const AuthFrom = ({ type }: { type: string }) => {
             await signUpWithGithub();
         } catch (error) {
             setFormError("GitHub OAuth sign-up failed.");
-        }finally{
+        } finally {
             setIsGithubLoading(false);
         }
     };
@@ -60,6 +62,8 @@ const AuthFrom = ({ type }: { type: string }) => {
         try {
             if (type === "sign-up") {
                 const newUser = await signup(values);
+
+                console.log("newUser",newUser);
                 setUser(newUser);
                 console.log(newUser);
             }
@@ -77,18 +81,10 @@ const AuthFrom = ({ type }: { type: string }) => {
         }
     };
 
-
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userData = await getLoggedInUser();
-                setUser(userData);
-            } catch (error) {
-                console.error("Error fetching logged-in user:", error);
-            }
-        };
-
-        fetchUser();
+        getLoggedInUser().then((user) => {
+            setUser(user);
+        });
     }, []);
 
 
@@ -98,7 +94,11 @@ const AuthFrom = ({ type }: { type: string }) => {
     return (
         <div>
             {user ? (
-                <h1 className=" text-green-600">SignUp Success</h1>
+
+                <>
+                    <h1 className=" text-green-600">SignUp Success</h1>
+                    <PlaidLinkComponent user={user} />
+                </>
             ) : (
                 <>
                     <Form {...form}>

@@ -3,12 +3,14 @@ import Header from '@/app/components/Header'
 import React from 'react'
 import { getLoggedInUser } from '../../../../lib/actions/user.action'
 import AuthFromRightSide from '@/app/components/auth-form/AuthFromRightSide'
+import PlaidLink from '@/app/components/PlaidLinkComponent'
 
 const SignUp = async () => {
     const loggedUser = await getLoggedInUser()
     console.log(loggedUser)
     return (
         <section className=' flex min-h-screen'>
+            
             {/* start left side */}
             <div className="py-3   flex-1 flex justify-center items-center">
                 <div className="  flex flex-col ">
@@ -18,8 +20,11 @@ const SignUp = async () => {
                         <Header />
 
                         <p className=' font-bold text-[1.4rem]'>Sign up</p>
+                        
 
                         <p className=' text-[.9rem]  mt-1 text-paragraphColor'>Welcome back! Please enter your details.</p>
+
+                       
                     </header>
                     {/*end log-in header  */}
 

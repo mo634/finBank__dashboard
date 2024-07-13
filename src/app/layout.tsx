@@ -28,7 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
+  
   return (
     <html lang="en">
       <body className={`font-ibm-plex-serif ${inter.variable} ${ibm_plex_serif.variable}`}>

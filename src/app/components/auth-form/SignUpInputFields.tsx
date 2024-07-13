@@ -18,8 +18,13 @@ const SignUpInputFields = ({formControl}: any) => {
             </div>
             <CustomInputField
                 control={formControl}
-                name="address"
+                name="address1"
                 placeholder="Enter Your Address"
+            />
+            <CustomInputField
+                control={formControl}
+                name="city"
+                placeholder="Enter Your City"
             />
             <div className="flex gap-x-5">
                 <CustomInputField
