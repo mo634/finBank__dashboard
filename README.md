@@ -18,7 +18,7 @@ Briefly describe your project, what it does, and why it is useful or interesting
   - Tailwind CSS
   - shadCn/ui
   - appwrite for backend integration
-  - 
+  - plaid,dwolla for banking accounts and payment 
 ## Key Features
 - Feature 1: Implement parallel routing concept.
 - Feature 2: Create Doughnut chart using Chart.js.
@@ -30,3 +30,5 @@ Briefly describe your project, what it does, and why it is useful or interesting
 - Secure Sessions: Implemented secure cookie handling for user sessions.
 - hadle protected routing for authenticated users
 - integrate OAuht functioanllity to login using github provider
+- integrate plaid platform for connecting app with banking acoounts
+- integrate dwolla with app for payments and exchange money between banking accounts securely 
