@@ -9,7 +9,7 @@ const TotalBalanceBox = ({accounts, totalBanks, totalCurrentBalance}: TotalBalan
         <div className='shadow-sm border flex p-3  '>
             {/* doughnut chart */}
             <div>
-                <DoughnutChat/>
+                <DoughnutChat accounts={accounts}/>
             </div>
 
             {/* total balance */}

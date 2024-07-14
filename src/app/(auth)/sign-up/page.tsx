@@ -1,13 +1,12 @@
 import AuthFrom from '@/app/components/auth-form/AuthFrom'
 import Header from '@/app/components/Header'
 import React from 'react'
-import { getLoggedInUser } from '../../../../lib/actions/user.action'
+import { getLoggedInUser } from '../../../../lib/actions/auth.actions'
 import AuthFromRightSide from '@/app/components/auth-form/AuthFromRightSide'
 import PlaidLink from '@/app/components/PlaidLinkComponent'
 
 const SignUp = async () => {
     const loggedUser = await getLoggedInUser()
-    console.log(loggedUser)
     return (
         <section className=' flex min-h-screen'>
             

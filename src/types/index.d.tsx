@@ -104,3 +104,21 @@ declare interface createBankAccountProps {
     shareableId: string;
 }
 
+declare interface getAccountsProps {
+    userId: string;
+}
+
+
+declare type Bank = {
+    $id: string;
+    accountId: string;
+    bankId: string;
+    accessToken: string;
+    fundingSourceUrl: string;
+    userId: string;
+    shareableId: string;
+};
+declare interface getUserInfoProps {
+    userId: string;
+  }
+  

@@ -12,15 +12,18 @@ ChartJS.register(
     Tooltip,
     Legend
 );
-const DoughnutChat = () => {
+const DoughnutChat = ({accounts}:any) => {
+    const accountName = accounts.map((a:any)=>a.name)
+    const balance = accounts.map((a:any)=>a.currentBalance)
+    console.log("doungit",accounts)
     // init data for chart 
     const data = {
-        labels: ['bank 1', 'bank 2', 'bank 3'],
+        labels: accountName,
         datasets: [
             {
                 label: '# of Votes',
 
-                data: [1250, 2500, 3750],
+                data: balance,
 
                 backgroundColor: ["#0747b6", "#2265d8", "#2f91fa"]
 

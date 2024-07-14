@@ -1,7 +1,7 @@
 "use server";
 import { cookies, headers } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config.js"
-import { Account, Client, ID, OAuthProvider } from "node-appwrite";
+import { Account, Client, ID, OAuthProvider, Query } from "node-appwrite";
 import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../../src/lib/utils";
 import { redirect } from "next/navigation.js";
 import { CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCreateRequestProcessorEnum, Products } from "plaid";
@@ -15,7 +15,6 @@ import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
 
 export async function createLinkToken(user: User) {
   try {
-    console.log("create link token run")
     const tokenParams = {
       user: {
         client_user_id: user.$id
@@ -27,7 +26,6 @@ export async function createLinkToken(user: User) {
     }
 
     const response = await plaidClient.linkTokenCreate(tokenParams);
-    console.log("response is ",response)
 
     return parseStringify({
       linkToken: response.data.link_token
@@ -150,3 +148,51 @@ export async function exchangePublicToken({ publicToken, user }: exchangePublicT
 
 // ************ end needed functions to integrate with Plaid platform and dwolla ************
 
+// ************ start get Bank data from appwrite DB ************
+export const getBanks = async ({userId}: getAccountsProps)=> {
+  try {
+    // get appwrite database
+
+
+    const {database} = await createAdminClient();
+
+
+    const bankAccounts = await database.listDocuments(
+      process.env.APPWRITE_DATABASE_ID!, 
+      process.env.APPWRITE_BANKS_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    
+    );
+
+    return parseStringify(bankAccounts.documents)
+  } catch (error) {
+    console.log("error while getting accounts data  from appwrite database", error)
+  }
+}
+
+
+// ************ end get Bank data from appwrite DB ************
+
+// ************ start get user data from appwrite DB ************
+export const getUserInfo = async ({userId}: getAccountsProps)=> {
+  try {
+
+
+    
+    const {database} = await createAdminClient();
+
+
+    const user = await database.listDocuments(
+      process.env.APPWRITE_DATABASE_ID!, 
+      process.env.APPWRITE_USER_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    )
+
+
+
+    return parseStringify(user.documents[0]);
+  } catch (error) {
+    console.log("error while getting user account  data  from appwrite database", error) 
+  }
+}
+// ************ end get user  data from appwrite DB ************

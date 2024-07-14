@@ -3,12 +3,23 @@ import HeaderBox from '../components/HeadeBox'
 import TotalBalanceBox from '../components/TotalBalanceBox'
 import RightSide from '../components/RightSide'
 import { getLoggedInUser } from '../../../lib/actions/auth.actions'
+import { getAccounts } from '../../../lib/actions/bank.actions'
 
 
 
 const Home = async () => {
     const loggedUser = await getLoggedInUser()
-    console.log(loggedUser?.name)
+
+    const accounts = await getAccounts({ 
+        userId: loggedUser.$id 
+      })
+
+      if(!accounts) return 
+
+      const accountData = accounts?.data
+
+    //   console.log("accounts",accounts)
+
     return (
         <section className=" max-h-screen main-container flex  gap-y-[10px] ">
             {/* start Middle part  */}
@@ -20,7 +31,7 @@ const Home = async () => {
                     <HeaderBox
                         type="greeting"
                         tittle="Welcome"
-                        user={loggedUser?.name || "Guest"}
+                        user={loggedUser || "Guest"}
                         subtext="Access & manage your account and transactions efficiently."
                     />
                 </header>
@@ -29,9 +40,9 @@ const Home = async () => {
                 {/* start total balance box  */}
                 <div>
                     <TotalBalanceBox
-                        accounts={[]}
-                        totalBanks={1}
-                        totalCurrentBalance={1250.35}
+                        accounts={accountData}
+                        totalBanks={accounts?.totalBanks}
+                        totalCurrentBalance={accounts?.totalCurrentBalance}
                     />
                 </div>
                 {/* end total balance box  */}
@@ -44,7 +55,7 @@ const Home = async () => {
             <div className="w-[30%] h-screen px-3 max-xl:hidden">
                 <RightSide
                     banks={[{}, {}]}
-                    user={loggedUser?.name || "Guest"}
+                    user={loggedUser || "Guest"}
                     email={loggedUser?.email || "Guest@gmail.com"}
                 />
             </div>

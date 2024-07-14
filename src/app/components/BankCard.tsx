@@ -9,13 +9,13 @@ const BankCard = ({user}) => {
             {/* left side Card  */}
             <div className=" p-3  flex flex-col justify-between  " >
                 <div className="">
-                    <h2>{user}</h2>
+                    <h2>{user.firstName}</h2>
                     <span>$123.50</span>
                 </div>
                 <div className="">
 
                     <div className=" mb-2 flex justify-between">
-                        <span>{user}</span>
+                        <span>{user.firstName}</span>
                         <span>**/**</span>
                     </div>
 

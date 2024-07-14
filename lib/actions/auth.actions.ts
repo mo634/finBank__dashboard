@@ -5,12 +5,12 @@ import { createDwollaCustomer } from "./dwolla.actions";
 import { extractCustomerIdFromUrl, parseStringify } from "@/lib/utils";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation.js";
+import { getUserInfo } from "./user.action";
 
 export async function signup({password , ...userData}: SignUpParams) {
     try {
       const { email, firstName, lastName } = userData;
       
-      console.log(userData)
   
       let newUserAccount
   
@@ -68,16 +68,18 @@ export async function signup({password , ...userData}: SignUpParams) {
   export async function signIn({ email, password }: SignInParams) {
     try {
       const { account } = await createAdminClient();
-      const response = await account.createEmailPasswordSession(email, password);
+      const session = await account.createEmailPasswordSession(email, password);
   
-      cookies().set("appwrite-session", response.secret, {
+      cookies().set("appwrite-session", session.secret, {
         path: "/",
         httpOnly: true,
         sameSite: "strict",
         secure: true,
       });
-  
-      return parseStringify(response);
+      const user = await getUserInfo({ userId: session.userId }) 
+
+      return parseStringify(user);
+
     } catch (error) {
       console.error("Sign-in error:", error);
       throw new Error("Invalid email or password");
@@ -111,7 +113,12 @@ export async function signup({password , ...userData}: SignUpParams) {
   export async function getLoggedInUser() {
     try {
       const { account } = await createSessionClient();
-      return await account.get();
+      const result = await account.get();
+    
+      const user = await getUserInfo({ userId: result.$id})
+
+
+      return parseStringify(user);
     } catch (error) {
       console.error("Get logged-in user error:", error);
     }

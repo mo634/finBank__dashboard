@@ -63,9 +63,9 @@ const AuthFrom = ({ type }: { type: string }) => {
             if (type === "sign-up") {
                 const newUser = await signup(values);
 
-                console.log("newUser",newUser);
+
                 setUser(newUser);
-                console.log(newUser);
+
             }
             if (type === "sign-in") {
                 const response = await signIn({
