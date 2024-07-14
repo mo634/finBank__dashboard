@@ -2,7 +2,7 @@ import React from 'react'
 import HeaderBox from '../components/HeadeBox'
 import TotalBalanceBox from '../components/TotalBalanceBox'
 import RightSide from '../components/RightSide'
-import { getLoggedInUser } from '../../../lib/actions/user.action.ts'
+import { getLoggedInUser } from '../../../lib/actions/auth.actions'
 
 
 

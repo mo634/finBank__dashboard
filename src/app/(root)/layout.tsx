@@ -1,7 +1,7 @@
 import Image from "next/image";
 import MobileSideBar from "../components/MobileSideBar";
 import SideBar from "../components/SideBar";
-import { getLoggedInUser } from "../../../lib/actions/user.action";
+import { getLoggedInUser } from "../../../lib/actions/auth.actions";
 import { redirect } from "next/navigation";
 export default async function NestedLayout({
     children,

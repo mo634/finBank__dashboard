@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { signOut } from '../../../lib/actions/user.action'
+import { signOut } from '../../../lib/actions/auth.actions'
 
 const SideBarFooter = ({ user }) => {
 

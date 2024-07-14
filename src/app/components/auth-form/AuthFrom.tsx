@@ -18,7 +18,7 @@ import { formSchema } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { getLoggedInUser, signIn, signup, signUpWithGithub } from "../../../../lib/actions/user.action";
+import { getLoggedInUser, signIn, signup, signUpWithGithub } from "../../../../lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import SignUpInputFields from "./SignUpInputFields";
 
