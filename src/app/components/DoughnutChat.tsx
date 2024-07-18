@@ -15,7 +15,7 @@ ChartJS.register(
 const DoughnutChat = ({accounts}:any) => {
     const accountName = accounts.map((a:any)=>a.name)
     const balance = accounts.map((a:any)=>a.currentBalance)
-    console.log("doungit",accounts)
+
     // init data for chart 
     const data = {
         labels: accountName,

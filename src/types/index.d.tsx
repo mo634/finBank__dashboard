@@ -1,3 +1,5 @@
+
+
 declare interface HeaderBoxProps {
     type: "title" | "greeting"
     user?: string
@@ -120,5 +122,98 @@ declare type Bank = {
 };
 declare interface getUserInfoProps {
     userId: string;
-  }
-  
+}
+
+declare type SearchParamProps = {
+    params: { [key: string]: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+declare interface getAccountProps {
+    appwriteItemId: string;
+}
+
+declare interface getBankProps {
+    documentId: string;
+}
+
+declare interface CreateTransactionProps {
+    name: string;
+    amount: string;
+    senderId: string;
+    receiverId: string;
+    senderBankId: string;
+    receiverBankId: string;
+    email: string;
+}
+declare interface getTransactionsByBankIdProps {
+    bankId: string;
+}
+declare type Transaction = {
+    id: string;
+    $id: string;
+    name: string;
+    paymentChannel: string;
+    accountId: string;
+    amount: number;
+    pending: boolean;
+    category: string;
+    date: string;
+    image: string;
+    type: string;
+    $createdAt: string;
+    channel: string;
+    senderBankId: string;
+    receiverBankId: string;
+};
+declare interface getTransactionsProps {
+    accessToken: string;
+}
+declare interface getInstitutionProps {
+    institutionId: string;
+}
+
+declare interface RecentTransactionsProps {
+    accounts: Account[];
+    transactions: Transaction[];
+    appwriteItemId: string;
+    page: number;
+}
+declare interface TransactionTableProps {
+    transactions: Transaction[];
+}
+declare interface CategoryBadgeProps {
+    category: string;
+}
+
+declare type AccountTypes =
+    | "depository"
+    | "credit"
+    | "loan "
+    | "investment"
+    | "other";
+
+
+declare interface BankInfoProps {
+    account: Account;
+    appwriteItemId?: string;
+    type: "full" | "card";
+}
+
+declare interface BankTabItemProps {
+    account: Account;
+    appwriteItemId?: string;
+}
+declare type Account = {
+    id: string;
+    availableBalance: number;
+    currentBalance: number;
+    officialName: string;
+    mask: string;
+    institutionId: string;
+    name: string;
+    type: string;
+    subtype: string;
+    appwriteItemId: string;
+    shareableId: string;
+};

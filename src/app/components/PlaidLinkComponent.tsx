@@ -4,8 +4,9 @@ import { useRouter } from 'next/navigation'
 import React, { useCallback, useEffect, useState } from 'react'
 import { PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
 import { createLinkToken, exchangePublicToken } from '../../../lib/actions/user.action'
+import { cn } from '@/lib/utils'
 
-const PlaidLinkComponent = ({ user }) => {
+const PlaidLinkComponent = ({ user, sideBarBtn = false }: any) => {
     const router = useRouter()
     const [token, setToken] = useState("")
 
@@ -35,13 +36,26 @@ const PlaidLinkComponent = ({ user }) => {
     const { open, ready } = usePlaidLink(config)
 
     return (
-        <Button
-            className="w-full bg-bankGradient my-2"
-            onClick={() => open()}
-            disabled={!ready} // The button will be enabled when `ready` is true
-        >
-            Link to bank account
-        </Button>
+        <>
+            {
+                sideBarBtn
+                    ? <Button
+                        className={`w-full bg-black-1`}
+                        onClick={() => open()}
+                        disabled={!ready} // The button will be enabled when `ready` is true
+                    >
+                        Link to bank account
+                    </Button>
+
+                    : <Button
+                        className="w-full bg-bankGradient my-2"
+                        onClick={() => open()}
+                        disabled={!ready} // The button will be enabled when `ready` is true
+                    >
+                        Link to bank account
+                    </Button>
+            }
+        </>
     )
 }
 

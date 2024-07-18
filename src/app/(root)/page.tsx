@@ -3,28 +3,38 @@ import HeaderBox from '../components/HeadeBox'
 import TotalBalanceBox from '../components/TotalBalanceBox'
 import RightSide from '../components/RightSide'
 import { getLoggedInUser } from '../../../lib/actions/auth.actions'
-import { getAccounts } from '../../../lib/actions/bank.actions'
+import { getAccount, getAccounts } from '../../../lib/actions/bank.actions'
+import RecentTransactions from '../components/RecentTransactions'
+import MobileRightSide from '../components/MobileRightSide'
 
 
 
-const Home = async () => {
+const Home = async ({
+    searchParams: { id, page },
+}: SearchParamProps) => {
+    const currentPage = Number(page as string) || 1
+
     const loggedUser = await getLoggedInUser()
 
-    const accounts = await getAccounts({ 
-        userId: loggedUser.$id 
-      })
+    const accounts = await getAccounts({
+        userId: loggedUser?.$id
+    })
 
-      if(!accounts) return 
+    if (!accounts) return
 
-      const accountData = accounts?.data
+    const accountData = accounts?.data
 
-    //   console.log("accounts",accounts)
+    const appwriteItemId = (id as string) || accountData[0]?.appwriteItemId
+
+    const account = await getAccount({ appwriteItemId })
+
+
 
     return (
-        <section className=" max-h-screen main-container flex  gap-y-[10px] ">
+        <section className=" main-container flex items-start gap-y-[10px]  ">
             {/* start Middle part  */}
 
-            <div className="w-[70%] max-xl:w-full ">
+            <div className=" w-full ">
 
                 {/*stat   Header  */}
                 <header>
@@ -47,20 +57,31 @@ const Home = async () => {
                 </div>
                 {/* end total balance box  */}
 
+                {/* start recent transactions  */}
+
+                <div className="">
+                    <RecentTransactions
+                        accounts={accountData}
+                        appwriteItemId={appwriteItemId}
+                        page={currentPage}
+                        transactions={account?.transactions}
+                    />
+                </div>
+
+                {/* end recent transactions  */}
             </div>
             {/* end  Middle part  */}
 
             {/* start rightSide */}
 
-            <div className="w-[30%] h-screen px-3 max-xl:hidden">
-                <RightSide
-                    banks={[{}, {}]}
-                    user={loggedUser || "Guest"}
-                    email={loggedUser?.email || "Guest@gmail.com"}
-                />
-            </div>
+            <RightSide
+                banks={[{}, {}]}
+                user={loggedUser || "Guest"}
+                email={loggedUser?.email || "Guest@gmail.com"}
+            />
 
             {/* end rightSide */}
+
 
 
 

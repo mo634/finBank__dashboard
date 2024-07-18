@@ -16,11 +16,10 @@ export default async function NestedLayout({
 
 
     return (
-        <main className=" flex max-md:flex-col  ">
+        <main className=" flex h-fit items-start w-full  max-md:flex-col   ">
             <SideBar
                 user={loggedIn}
             />
-
             {/* render mobile sidebar */}
             <div className="p-4 shadow-md hidden max-md:flex mb-3 justify-between ">
                 <div className="">
@@ -37,7 +36,7 @@ export default async function NestedLayout({
                 </div>
             </div>
             <div className="flex-1 ">
-            {children}
+                {children}
             </div>
         </main>
     );

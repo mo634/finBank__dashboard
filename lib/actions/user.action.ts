@@ -149,19 +149,21 @@ export async function exchangePublicToken({ publicToken, user }: exchangePublicT
 // ************ end needed functions to integrate with Plaid platform and dwolla ************
 
 // ************ start get Bank data from appwrite DB ************
-export const getBanks = async ({userId}: getAccountsProps)=> {
+
+// get all banks for one user 
+export const getBanks = async ({ userId }: getAccountsProps) => {
   try {
     // get appwrite database
 
 
-    const {database} = await createAdminClient();
+    const { database } = await createAdminClient();
 
 
     const bankAccounts = await database.listDocuments(
-      process.env.APPWRITE_DATABASE_ID!, 
+      process.env.APPWRITE_DATABASE_ID!,
       process.env.APPWRITE_BANKS_COLLECTION_ID!,
       [Query.equal("userId", [userId])]
-    
+
     );
 
     return parseStringify(bankAccounts.documents)
@@ -170,20 +172,38 @@ export const getBanks = async ({userId}: getAccountsProps)=> {
   }
 }
 
+// get specific bank info
+export const getBank = async ({ documentId }: getBankProps) => {
+  try {
+
+
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      process.env.APPWRITE_DATABASE_ID!,
+      process.env.APPWRITE_BANKS_COLLECTION_ID!,
+      [Query.equal('$id', [documentId])]
+    )
+
+    return parseStringify(bank.documents[0]);
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 // ************ end get Bank data from appwrite DB ************
 
 // ************ start get user data from appwrite DB ************
-export const getUserInfo = async ({userId}: getAccountsProps)=> {
+export const getUserInfo = async ({ userId }: getAccountsProps) => {
   try {
 
 
-    
-    const {database} = await createAdminClient();
+
+    const { database } = await createAdminClient();
 
 
     const user = await database.listDocuments(
-      process.env.APPWRITE_DATABASE_ID!, 
+      process.env.APPWRITE_DATABASE_ID!,
       process.env.APPWRITE_USER_COLLECTION_ID!,
       [Query.equal("userId", [userId])]
     )
@@ -192,7 +212,7 @@ export const getUserInfo = async ({userId}: getAccountsProps)=> {
 
     return parseStringify(user.documents[0]);
   } catch (error) {
-    console.log("error while getting user account  data  from appwrite database", error) 
+    console.log("error while getting user account  data  from appwrite database", error)
   }
 }
 // ************ end get user  data from appwrite DB ************

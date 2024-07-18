@@ -8,13 +8,14 @@ import { usePathname } from 'next/navigation'
 import Header from './Header'
 import { cn } from '../../../src/lib/utils'
 import SideBarFooter from './SideBarFooter'
+import PlaidLinkComponent from './PlaidLinkComponent'
 const SideBar = ({ user }: any) => {
     const pathname = usePathname()
 
     return (
-        <section className='flex flex-col justify-between h-screen main-container px-2 max-md:hidden '>
+        <section className='sticky left-0 top-0  w-fit flex  h-screen  flex-col justify-between main-container px-2 max-md:hidden '>
             
-            <div className=" ">
+            <div className="">
                 {/*start header */}
                 <Header applyMedia={true} />
                 {/*end header */}
@@ -53,6 +54,7 @@ const SideBar = ({ user }: any) => {
                         }
                         )
                     }
+                    <PlaidLinkComponent user = {user} sideBarBtn={true}/>
                 </nav>
                 {/* end links */}
             </div>
