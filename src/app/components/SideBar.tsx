@@ -2,13 +2,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { sidebarLinks } from '../../../constants'
+
 
 import { usePathname } from 'next/navigation'
 import Header from './Header'
 import { cn } from '../../../src/lib/utils'
 import SideBarFooter from './SideBarFooter'
 import PlaidLinkComponent from './PlaidLinkComponent'
+import { sidebarLinks } from '@/constants'
 const SideBar = ({ user }: any) => {
     const pathname = usePathname()
 

@@ -45,7 +45,7 @@ const TransactionInfo = ({ transactions }: TransactionTableProps) => {
             <TableBody>
 
                 {
-                    transactions.map((t) => {
+                    transactions?.map((t) => {
                         // set needed variables 
                         const status = getTransactionStatus(new Date(t.date))
 
