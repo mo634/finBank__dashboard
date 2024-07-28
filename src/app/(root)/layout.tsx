@@ -21,7 +21,7 @@ export default async function NestedLayout({
                 user={loggedIn}
             />
             {/* render mobile sidebar */}
-            <div className="p-4 shadow-md hidden max-md:flex mb-3 justify-between ">
+            <div className="p-4 shadow-md hidden max-md:flex mb-3 justify-between w-full ">
                 <div className="">
                     <Image
                         src={"/icons/icon.svg"}
