@@ -6,8 +6,6 @@
 - [Key Features](#key-features)
 - [Installation](#installation)
 
-## Introduction
-Briefly describe your project, what it does, and why it is useful or interesting.
 
 ## Technologies Used
   - React
